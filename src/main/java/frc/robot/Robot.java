@@ -12,6 +12,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * this project, you must also update the Main.java file in the project.
  */
 public class Robot extends TimedRobot {
+  TalonFX m_kraken = new TalonFX(1);
+  XboxController m_xbox = new XboxController(0);
+  double multipler;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -31,7 +35,16 @@ public class Robot extends TimedRobot {
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    if (m_xbox.getAButtonPressed()) {
+      multipler = multipler + 0.2;
+    };
+
+    if (multipler == 1.2) {
+      multipler = 0;
+    }
+    m_kraken.set(m_xbox.getLeftX()*multiplier)
+  }
 
   @Override
   public void disabledInit() {}
